@@ -5,48 +5,96 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        //Считываем строку
+
+        float credit;
+        float payment;
+        float persent;
+
+
+        /**
+         * Считываем строку
+         * создаем массив строк
+         */
+
         Scanner scanner = new Scanner(System.in);
         String s = scanner.nextLine();
 
-        //создаем массив строк
         try {
+            String[] params = s.split(" ");
+            credit = Float.parseFloat(params[0]);
+            payment = Float.parseFloat(params[1]);
+            persent = Float.parseFloat(params[2]);
+            String creditType = params[3];
 
 
-        String [] params = s.split(" ");
-        float credit = Float.parseFloat(params[0]);
-        float payment = Float.parseFloat(params[1]);
-        float persent = Float.parseFloat(params[2]);
-        String creditType = params[3];
+            /**
+             * обработка отрицательных суммы,
+             * платежа ,процентов
+             */
 
-
-        // обработка исключений нуля в параметрах
-            if (credit <= 0 )
-            {
-            throw new Exception("сумма кредита меньше либо равна 0");
+            if (credit <= 0) {
+                throw new Exception("сумма кредита меньше либо равна 0");
             }
 
-            if (payment <= 0 )
-            {
+            if (payment <= 0) {
                 throw new Exception("сумма платежка меньше либо равна 0");
             }
 
-            if (persent <= 0 )
-            {
+            if (persent <= 0) {
                 throw new Exception("ставка кредита меньше либо равна 0");
             }
 
+            /**
+             * Вывод результата расчетов
+             */
 
-        if (creditType.equals("human"))
-        System.out.println(Human.overpayment(credit, persent, payment));
-        else if (creditType.equals("business"))
-        System.out.println(Business.overpayment(credit, persent, payment));
+            if (creditType.equals("human")) {
+                System.out.println(Human.overpaymentСalculation(credit, persent, payment));
+            } else if (creditType.equals("business")) {
+                System.out.println(Business.overpaymentСalculation(credit, persent, payment));
+            }
 
-        }
 
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
+
+    public static float paymentCount(float balance, float payment, float persent) {
+
+        float total = 0;
+        int m = 0;
+
+        while (balance > 0) {
+
+            /**
+             * проверка  последнего платежа
+             * и баланса
+             */
+
+            if (balance < payment) {
+                payment = balance;
+            }
+
+
+            balance -= payment;
+            total += payment;
+            m++;
+
+
+            /**
+             *  начисление процентов за период 12 месяцев
+             */
+            if (m == 12) {
+                balance = balance + balance * persent / 100;
+                m = 0;
+            }
+        }
+
+        return (total);
+    }
+
+
 }
+
+
