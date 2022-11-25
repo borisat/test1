@@ -24,7 +24,7 @@ public class Main {
             credit = Float.parseFloat(params[0]);
             payment = Float.parseFloat(params[1]);
             persent = Float.parseFloat(params[2]);
-            String creditType = params[3];
+            //String creditType = params[3];
 
 
             /**
@@ -44,13 +44,14 @@ public class Main {
                 throw new Exception("ставка кредита меньше либо равна 0");
             }
 
+
             /**
              * Вывод результата расчетов
              */
 
-            if (creditType.equals("human")) {
+            if (params[3].equals("human")) {
                 System.out.println(Human.overpaymentСalculation(credit, persent, payment));
-            } else if (creditType.equals("business")) {
+            } else if (params[3].equals("business")) {
                 System.out.println(Business.overpaymentСalculation(credit, persent, payment));
             }
 
@@ -60,7 +61,7 @@ public class Main {
         }
     }
 
-    public static float paymentCount(float balance, float payment, float persent) {
+    public static  float paymentCount(float balance, float payment, float persent) {
 
         float total = 0;
         int m = 0;
@@ -94,7 +95,13 @@ public class Main {
         return (total);
     }
 
+    public static void solvencyCheck(float balance, float payment) throws Exception {
+        if (payment * 12 <= balance / 12) {
+            throw new Exception("Кредит не будет погашен таким платежом");
+        }
 
+
+    }
 }
 
 

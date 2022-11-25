@@ -5,9 +5,7 @@ public class Human {
 
         float balance = credit + credit * persent / 100;
 
-        if ((((credit + credit * persent / 100) - payment * 12) < balance) && (payment * 12 <= balance / 12)) {
-            throw new Exception("Кредит не будет погашен таким платежом");
-        }
+        Main.solvencyCheck(balance, payment);
 
         return (Main.paymentCount(balance, payment, persent) - credit);
     }

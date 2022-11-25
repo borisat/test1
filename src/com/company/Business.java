@@ -5,10 +5,7 @@ public class Business {
 
         float balance = credit;
 
-        if (((credit - payment * 12) * persent / 100 < credit) && (payment * 12 <= balance / 12)) {
-            throw new Exception("Кредит не будет погашен таким платежом");
-        }
-
+        Main.solvencyCheck(balance, payment);
 
         return (Main.paymentCount(balance, payment, persent) - credit);
     }
