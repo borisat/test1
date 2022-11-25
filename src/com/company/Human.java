@@ -5,8 +5,6 @@ public class Human {
 
         float balance = credit + credit * persent / 100;
 
-        Main.solvencyCheck(balance, payment);
-
         return (Main.paymentCount(balance, payment, persent) - credit);
     }
 

@@ -61,10 +61,14 @@ public class Main {
         }
     }
 
-    public static  float paymentCount(float balance, float payment, float persent) {
+    public static  float paymentCount(float balance, float payment, float persent) throws Exception {
 
         float total = 0;
         int m = 0;
+
+        if (payment * 12 <= balance / 12) {
+            throw new Exception("Кредит не будет погашен таким платежом");
+        }
 
         while (balance > 0) {
 
@@ -95,13 +99,7 @@ public class Main {
         return (total);
     }
 
-    public static void solvencyCheck(float balance, float payment) throws Exception {
-        if (payment * 12 <= balance / 12) {
-            throw new Exception("Кредит не будет погашен таким платежом");
-        }
 
-
-    }
 }
 
 

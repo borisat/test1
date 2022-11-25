@@ -5,8 +5,6 @@ public class Business {
 
         float balance = credit;
 
-        Main.solvencyCheck(balance, payment);
-
         return (Main.paymentCount(balance, payment, persent) - credit);
     }
 }
