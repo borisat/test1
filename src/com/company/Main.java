@@ -1,7 +1,24 @@
+import java.util.Arrays;
+
 public class Main {
 
 
     public static void main(String[] args) {
+
+        Box box0 = new Box(1);
+        Box box1 = new Box(1);
+        Box box2 = new Box(1);
+        Box box3 = new Box(1);
+        Box box4 = new Box(1);
+        Box box5 = new Box(1);
+        Box box6 = new Box(1);
+        Box box7 = new Box(1);
+        Box box8 = new Box(1);
+        Box box9 = new Box(1);
+        Box box10 = new Box(1);
+        Box box11 = new Box(1);
+
+        Box[] boxes = new Box[]{box0, box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11};
 
         System.out.println(getNonNormalBox(boxes));
     }
@@ -76,3 +93,42 @@ public class Main {
         }
         return 0;
     }
+
+
+    public static int comparing(Box[] arrayA, Box[] arrayB) {
+
+        int aWeight = 0;
+        int bWeigth = 0;
+
+        for (int i = 0; i < arrayA.length; i++) {
+
+            aWeight += arrayA[i].weight;
+        }
+
+        for (int i = 0; i < arrayB.length; i++) {
+            bWeigth += arrayB[i].weight;
+        }
+
+        return aWeight - bWeigth;
+    }
+
+
+    public static int comparing(Box boxA, Box boxB) {
+
+        return boxA.weight - boxB.weight;
+    }
+
+}
+
+class Box {
+
+    int weight;
+
+
+    public Box(int weight) {
+
+        this.weight = weight;
+
+    }
+
+}
