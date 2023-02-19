@@ -1,105 +1,78 @@
-package com.company;
-
-import java.util.Scanner;
-
 public class Main {
+
 
     public static void main(String[] args) {
 
-        float credit;
-        float payment;
-        float persent;
-
-
-        /**
-         * Считываем строку
-         * создаем массив строк
-         */
-
-        Scanner scanner = new Scanner(System.in);
-        String s = scanner.nextLine();
-
-        try {
-            String[] params = s.split(" ");
-            credit = Float.parseFloat(params[0]);
-            payment = Float.parseFloat(params[1]);
-            persent = Float.parseFloat(params[2]);
-            //String creditType = params[3];
-
-
-            /**
-             * обработка отрицательных суммы,
-             * платежа ,процентов
-             */
-
-            if (credit <= 0) {
-                throw new Exception("сумма кредита меньше либо равна 0");
-            }
-
-            if (payment <= 0) {
-                throw new Exception("сумма платежка меньше либо равна 0");
-            }
-
-            if (persent <= 0) {
-                throw new Exception("ставка кредита меньше либо равна 0");
-            }
-
-
-            /**
-             * Вывод результата расчетов
-             */
-
-            if (params[3].equals("human")) {
-                System.out.println(Human.overpaymentСalculation(credit, persent, payment));
-            } else if (params[3].equals("business")) {
-                System.out.println(Business.overpaymentСalculation(credit, persent, payment));
-            }
-
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    public static  float paymentCount(float balance, float payment, float persent) throws Exception {
-
-        float total = 0;
-        int m = 0;
-
-        if (payment * 12 <= balance / 12) {
-            throw new Exception("Кредит не будет погашен таким платежом");
-        }
-
-        while (balance > 0) {
-
-            /**
-             * проверка  последнего платежа
-             * и баланса
-             */
-
-            if (balance < payment) {
-                payment = balance;
-            }
-
-
-            balance -= payment;
-            total += payment;
-            m++;
-
-
-            /**
-             *  начисление процентов за период 12 месяцев
-             */
-            if (m == 12) {
-                balance = balance + balance * persent / 100;
-                m = 0;
-            }
-        }
-
-        return (total);
+        System.out.println(getNonNormalBox(boxes));
     }
 
 
-}
+    public static int getNonNormalBox(Box[] boxes) {
+
+        Box[] boxesBox = boxes;
+        Box[] boxArrayA = new Box[]{boxesBox[0], boxesBox[1], boxesBox[2], boxesBox[3]};
+        Box[] boxArrayB = new Box[]{boxesBox[4], boxesBox[5], boxesBox[6], boxesBox[7]};
 
 
+        if (comparing(boxArrayA, boxArrayB) == 0) {
+            if (comparing(boxesBox[8], boxesBox[9]) == 0) {
+                if (comparing(boxesBox[8], boxesBox[10]) == 0) {
+                    return 11;
+                }
+                return 10;
+            } else if (comparing(boxesBox[9], boxesBox[11]) == 0) {
+                return 8;
+            }
+            return 9;
+        } else if (comparing(boxArrayA, boxArrayB) > 0) {
+            boxArrayA = new Box[]{boxesBox[0], boxesBox[8], boxesBox[9], boxesBox[10]};
+            boxArrayB = new Box[]{boxesBox[4], boxesBox[1], boxesBox[2], boxesBox[3]};
+            if (comparing(boxArrayA, boxArrayB) == 0) {
+                if (comparing(boxesBox[5], boxesBox[6]) == 0) {
+                    return 7;
+                } else if (comparing(boxesBox[5], boxesBox[6]) > 0) {
+                    return 6;
+                }
+                return 5;
+            } else if (comparing(boxArrayA, boxArrayB) > 0) {
+                if (comparing(boxesBox[0], boxesBox[8]) == 0) {
+                    return 4;
+                }
+                return 0;
+            } else if ((comparing(boxArrayA, boxArrayB) < 0)) {
+                if (comparing(boxesBox[1], boxesBox[2]) == 0) {
+                    return 3;
+                } else if (comparing(boxesBox[1], boxesBox[2]) > 0) {
+                    return 1;
+                }
+                return 2;
+            }
+        }
+
+
+        else if (comparing(boxArrayA, boxArrayB) < 0) {
+            boxArrayA = new Box[]{boxesBox[4], boxesBox[8], boxesBox[9], boxesBox[10]};
+            boxArrayB = new Box[]{boxesBox[0], boxesBox[5], boxesBox[6], boxesBox[7]};
+            if (comparing(boxArrayA, boxArrayB) == 0) {
+                if (comparing(boxesBox[1], boxesBox[2]) == 0) {
+                    return 3;
+                } else if (comparing(boxesBox[1], boxesBox[2]) > 0) {
+                    return 2;
+                }
+                return 1;
+            } else if (comparing(boxArrayA, boxArrayB) > 0) {
+                if (comparing(boxesBox[0], boxesBox[8]) == 0) {
+                    return 4;
+                }
+                return 0;
+            } else if ((comparing(boxArrayA, boxArrayB) < 0)) {
+                if (comparing(boxesBox[5], boxesBox[6]) == 0) {
+                    return 7;
+                } else if (comparing(boxesBox[5], boxesBox[6]) > 0) {
+                    return 5;
+                }
+                return 6;
+            }
+        }
+        return 0;
+    }
