@@ -11,7 +11,7 @@ public class Main {
         Box box3 = new Box(1);
         Box box4 = new Box(1);
         Box box5 = new Box(1);
-        Box box6 = new Box(1);
+        Box box6 = new Box(0);
         Box box7 = new Box(1);
         Box box8 = new Box(1);
         Box box9 = new Box(1);
