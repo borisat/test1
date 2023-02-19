@@ -65,8 +65,6 @@ public class Main {
                 return 2;
             }
         }
-
-
         else if (comparing(boxArrayA, boxArrayB) < 0) {
             boxArrayA = new Box[]{boxesBox[4], boxesBox[8], boxesBox[9], boxesBox[10]};
             boxArrayB = new Box[]{boxesBox[0], boxesBox[5], boxesBox[6], boxesBox[7]};
